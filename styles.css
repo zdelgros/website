@@ -18,6 +18,50 @@ body {
     overflow-y: auto;
 }
 
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #2E3192, #1BFFFF);
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.9;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none; /* Removes underline */
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: white;
+}
+
+.button:active,
+.button:focus {
+    text-decoration: none; /* Ensures no underline when clicked */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
 .content-page {
     display: flex;
     flex-direction: row;
