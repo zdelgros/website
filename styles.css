@@ -1,0 +1,88 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #2E3192, #1BFFFF);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: auto;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.content-page {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: auto;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar {
+    position: fixed;
+    left: 20px;
+    top: 100px;
+    width: 200px;
+/*    background: rgba(255, 255, 255, 0.1);*/
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.sidebar ul li a:hover, .sidebar ul li a.active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar ul li a.active {
+    background: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-left: 250px;
+    padding: 40px;
+    flex-grow: 1;
+}
+
+.text-column {
+/*    background: rgba(255, 255, 255, 0.1);*/
+    padding: 30px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+.text-column h2 {
+    margin-bottom: 20px;
+}
+
+.text-column p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.text-column:target {
+    background: rgba(255, 255, 255, 0.3);
+}
