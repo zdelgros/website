@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Decision Design Lab</title>
+  <title>Projects — Decision Design Lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
-  <script defer src="assets/scripts/main.js"></script>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script defer src="/assets/scripts/main.js"></script>
 </head>
 <body>
   <nav class="site-nav">
@@ -22,33 +22,31 @@
     </div>
   </nav>
 
-  <main>
-    <section class="hero">
-      <h1>Decision Design Lab</h1>
-      <p class="hero__tagline">At the intersection of data, design and decision making</p>
-      <div class="hero__scroll-indicator" aria-hidden="true"></div>
-    </section>
+  <main class="container">
+    <header class="page-header">
+      <h1>Projects</h1>
+      <p>Tools, experiments, and explorations.</p>
+    </header>
 
-    <section class="featured container">
-      <h2 class="featured__heading label">Selected Projects</h2>
+    <div class="projects-grid">
       <div class="project-grid">
         <a href="/projects/kanban/" class="project-card">
           <span class="project-card__tag">Tool</span>
           <span class="project-card__title">Kanban Board</span>
-          <span class="project-card__desc">A drag-and-drop task management board with persistent state.</span>
+          <span class="project-card__desc">A drag-and-drop task management board with persistent state. Organize tasks across columns with automatic localStorage saving.</span>
         </a>
         <a href="/projects/gallery/" class="project-card">
           <span class="project-card__tag">Photography</span>
           <span class="project-card__title">Photo Gallery</span>
-          <span class="project-card__desc">A curated collection of photographs in a masonry layout.</span>
+          <span class="project-card__desc">A curated collection of photographs displayed in a responsive masonry grid with lightbox viewing.</span>
         </a>
         <a href="/projects/" class="project-card">
-          <span class="project-card__tag">Coming Soon</span>
+          <span class="project-card__tag">Data Viz</span>
           <span class="project-card__title">Data Visualizations</span>
-          <span class="project-card__desc">Interactive explorations of data and visual storytelling.</span>
+          <span class="project-card__desc">Interactive explorations of data and visual storytelling. Coming soon.</span>
         </a>
       </div>
-    </section>
+    </div>
   </main>
 
   <footer class="site-footer">
