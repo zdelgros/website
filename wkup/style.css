@@ -1718,12 +1718,15 @@ body[data-lang="en"] .lang-en     { display: revert !important; }
   flex-shrink: 0;
   letter-spacing: 0.05em;
 }
+.format-list li div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
 .format-list li strong {
   font-weight: 600;
   color: var(--brown);
-  display: block;
   font-size: 0.9375rem;
-  margin-bottom: 0.125rem;
 }
 .format-list li span {
   font-size: 0.85rem;
