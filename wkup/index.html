@@ -35,7 +35,7 @@
       <li><a href="/wkup/" data-nl="Home" data-en="Home">Home</a></li>
       <li><a href="/wkup/#agenda" data-nl="Agenda" data-en="Agenda">Agenda</a></li>
       <li><a href="/wkup/mindfulness/" data-nl="Mindfulness" data-en="Mindfulness">Mindfulness</a></li>
-      <li><a href="/wkup/groepen/" data-nl="Vind een sangha" data-en="Find a sangha">Vind een sangha</a></li>
+      <li><a href="/wkup/groepen/" data-nl="Vind een groep" data-en="Find a group">Vind een groep</a></li>
       <li><a href="/wkup/over-ons/" data-nl="Over ons" data-en="About">Over ons</a></li>
       <li><a href="/wkup/retraites/" data-nl="Retraites" data-en="Retreats">Retraites</a></li>
     </ul>
@@ -64,7 +64,7 @@
   <a href="/wkup/" data-nl="Home" data-en="Home">Home</a>
   <a href="/wkup/#agenda" data-nl="Agenda" data-en="Agenda">Agenda</a>
   <a href="/wkup/mindfulness/" data-nl="Mindfulness" data-en="Mindfulness">Mindfulness</a>
-  <a href="/wkup/groepen/" data-nl="Vind een sangha" data-en="Find a sangha">Vind een sangha</a>
+  <a href="/wkup/groepen/" data-nl="Vind een groep" data-en="Find a group">Vind een groep</a>
   <a href="/wkup/over-ons/" data-nl="Over ons" data-en="About">Over ons</a>
   <a href="/wkup/retraites/" data-nl="Retraites" data-en="Retreats">Retraites</a>
   <div class="nav__lang" role="group" aria-label="Taal kiezen">
@@ -111,20 +111,11 @@
       &ldquo;Het verleden is er niet meer, de toekomst is er nog niet; er is slechts één moment waarin het leven beschikbaar is, en dat is het huidige moment.&rdquo;
     </blockquote>
 
-    <!-- Brushstroke accent -->
-    <div class="hero__stroke" aria-hidden="true">
-      <svg width="110" height="14" viewBox="0 0 110 14" fill="none">
-        <path d="M 4 7 Q 28 3 55 7 Q 82 11 106 6"
-              stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-    </div>
-
     <p class="hero__attribution">— Thich Nhất Hạnh</p>
   </div>
 
   <!-- Scroll hint -->
   <div class="hero__scroll" aria-hidden="true">
-    <span data-nl="Ontdek meer" data-en="Discover more">Ontdek meer</span>
     <div class="hero__scroll-line"></div>
   </div>
 
@@ -196,8 +187,8 @@
         Onze Sangha's
       </h2>
       <p class="fade-in delay-2"
-         data-nl="Vind een Wake Up groep bij jou in de buurt, of sluit je aan bij onze online sangha."
-         data-en="Find a Wake Up group near you, or join our online sangha.">
+         data-nl="Vind een Wake Up groep bij jou in de buurt, of sluit je aan bij een online sangha bijeenkomst."
+         data-en="Find a Wake Up group near you, or join one of our online sangha gatherings.">
         Vind een Wake Up groep bij jou in de buurt, of sluit je aan bij onze online sangha.
       </p>
     </div>
@@ -250,13 +241,6 @@
           <span data-nl="Lees meer" data-en="Learn more">Lees meer</span>
           <span aria-hidden="true">→</span>
         </a>
-      </article>
-
-      <!-- Haarlem -->
-      <article class="sangha-card sangha-card--inactive fade-in" data-a="plum" aria-label="Haarlem sangha — momenteel inactief">
-        <h3 class="sangha-card__city">Haarlem</h3>
-        <p class="sangha-card__status"
-           data-nl="Momenteel inactief" data-en="Currently inactive">Momenteel inactief</p>
       </article>
 
       <!-- Leiden -->
@@ -333,6 +317,7 @@
 
       <!-- Online — morning -->
       <article class="sangha-card sangha-card--online fade-in delay-3" data-a="terra">
+        <span class="online-badge" data-nl="Online" data-en="Online">Online</span>
         <h3 class="sangha-card__city lang-nl">Ochtend-sangha</h3>
         <h3 class="sangha-card__city lang-en">Morning sangha</h3>
         <p class="sangha-card__schedule"
@@ -346,6 +331,7 @@
 
       <!-- Online — Weekly -->
       <article class="sangha-card sangha-card--online fade-in delay-4" data-a="green">
+        <span class="online-badge" data-nl="Online" data-en="Online">Online</span>
         <h3 class="sangha-card__city lang-nl">Wekelijkse online sangha</h3>
         <h3 class="sangha-card__city lang-en">Weekly online sangha</h3>
         <p class="sangha-card__schedule"
@@ -359,6 +345,7 @@
 
       <!-- Online — Lotushart -->
       <article class="sangha-card sangha-card--online fade-in delay-4" data-a="plum">
+        <span class="online-badge" data-nl="Online" data-en="Online">Online</span>
         <h3 class="sangha-card__city">Lotushart</h3>
         <p class="sangha-card__schedule"
            data-nl="2e donderdag vd maand · 19:30–21:15"
@@ -438,13 +425,34 @@
       </p>
     </div>
 
-    <div class="agenda__empty fade-in delay-3">
-      <p data-nl="Er zijn momenteel geen aankomende evenementen gepland. Schrijf je in voor onze nieuwsbrief om als eerste op de hoogte te zijn."
-         data-en="There are currently no upcoming events scheduled. Sign up for our newsletter to be the first to hear about new dates.">
-        Er zijn momenteel geen aankomende evenementen gepland. Schrijf je in voor onze nieuwsbrief om als eerste op de hoogte te zijn.
-      </p>
-      <a href="#footer-newsletter" class="btn btn--outline"
-         data-nl="Nieuwsbrief" data-en="Newsletter">Nieuwsbrief</a>
+    <div class="agenda__events fade-in delay-3">
+      <article class="agenda-event" style="display:flex; gap:2rem; padding:2rem; background:var(--cream-warm); border-radius:12px; border:1px solid var(--border); align-items:flex-start;">
+        <div style="min-width:64px; text-align:center; padding-top:0.25rem;">
+          <div style="font-family:var(--font-sans); font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--plum); opacity:0.7;">
+            <span class="lang-nl">Jul</span><span class="lang-en">Jul</span>
+          </div>
+          <div style="font-family:var(--font-serif); font-size:2.5rem; line-height:1; color:var(--plum); font-weight:600;">01</div>
+          <div style="font-family:var(--font-sans); font-size:0.75rem; color:var(--brown-light);">2026</div>
+        </div>
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--plum); opacity:0.7; margin-bottom:0.4rem;">
+            <span class="lang-nl">Meerdaagse retraite</span><span class="lang-en">Multi-day retreat</span>
+          </p>
+          <h3 style="font-family:var(--font-serif); font-size:1.35rem; margin-bottom:0.5rem; color:var(--ink);">Wake Up Zomerretraite 2026</h3>
+          <p style="font-size:0.9rem; color:var(--brown-light); margin-bottom:0.75rem;">
+            <span class="lang-nl">Wo 1 – zo 5 juli 2026 &nbsp;·&nbsp; IVN Veldhoeve, Orvelte (Drenthe)</span>
+            <span class="lang-en">Wed 1 – Sun 5 July 2026 &nbsp;·&nbsp; IVN Veldhoeve, Orvelte (Drenthe)</span>
+          </p>
+          <p style="font-size:0.95rem; color:var(--brown); margin-bottom:1.25rem;">
+            <span class="lang-nl">Vijf dagen mindfulness, meditatie, beweging, zingen en diep samenzijn. Twee dharmaleraars aanwezig. Taal: voornamelijk Engels, met Nederlandse vertaling. Tickets: €326 (incl. verblijf in slaapzaal).</span>
+            <span class="lang-en">Five days of mindfulness, meditation, movement, singing, and deep togetherness. Two dharma teachers present. Language: mainly English with Dutch translation. Tickets: €326 (incl. dormitory accommodation).</span>
+          </p>
+          <a href="https://hipsy.nl/event/214701-wake-up-zomerretraite-2026" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:0.9rem;">
+            <span class="lang-nl">Meer info &amp; aanmelden</span>
+            <span class="lang-en">More info &amp; register</span>
+          </a>
+        </div>
+      </article>
     </div>
 
   </div>
@@ -459,7 +467,7 @@
 <!-- ============================================================
      FOOTER
      ============================================================ -->
-<footer class="footer" id="footer-newsletter">
+<footer class="footer">
   <div class="footer__inner">
 
     <div class="footer__top">
@@ -484,7 +492,7 @@
         <ul>
           <li><a href="/wkup/" data-nl="Home" data-en="Home">Home</a></li>
           <li><a href="#agenda" data-nl="Agenda" data-en="Agenda">Agenda</a></li>
-          <li><a href="#groups" data-nl="Vind een sangha" data-en="Find a sangha">Vind een sangha</a></li>
+          <li><a href="#groups" data-nl="Vind een groep" data-en="Find a group">Vind een groep</a></li>
           <li><a href="#about" data-nl="Over ons" data-en="About">Over ons</a></li>
           <li><a href="#retreats" data-nl="Retraites" data-en="Retreats">Retraites</a></li>
           <li><a href="https://plumvillage.org/wake-up/" target="_blank" rel="noopener"
@@ -492,27 +500,14 @@
         </ul>
       </div>
 
-      <!-- Newsletter -->
+      <!-- Contact -->
       <div class="footer__newsletter">
-        <h4 data-nl="Nieuwsbrief" data-en="Newsletter">Nieuwsbrief</h4>
-        <p data-nl="Blijf op de hoogte van evenementen, retraites en nieuws van Wake Up Nederland."
-           data-en="Stay updated on events, retreats, and news from Wake Up Nederland.">
-          Blijf op de hoogte van evenementen, retraites en nieuws van Wake Up Nederland.
+        <h4 data-nl="Contact" data-en="Contact">Contact</h4>
+        <p data-nl="Heb je vragen, ideeën of wil je betrokken raken? Stuur ons een bericht."
+           data-en="Have questions, ideas, or want to get involved? Send us a message.">
+          Heb je vragen, ideeën of wil je betrokken raken? Stuur ons een bericht.
         </p>
-        <form class="footer__form" onsubmit="handleSubscribe(event)">
-          <label for="footer-email" class="sr-only"
-                 data-nl="E-mailadres" data-en="Email address">E-mailadres</label>
-          <input
-            id="footer-email"
-            type="email"
-            class="footer__email"
-            data-nl="Jouw e-mailadres"
-            data-en="Your email address"
-            placeholder="Jouw e-mailadres"
-            required>
-          <button type="submit" class="footer__subscribe"
-                  data-nl="Aanmelden" data-en="Subscribe">Aanmelden</button>
-        </form>
+        <a href="mailto:sangha@wkup.nl" class="btn btn--outline" style="margin-top:1.25rem; display:inline-block;">sangha@wkup.nl</a>
       </div>
 
     </div>
@@ -661,21 +656,6 @@
   }
 
 
-  /* ── Newsletter ──────────────────────────────────────────── */
-
-  window.handleSubscribe = function (e) {
-    e.preventDefault();
-    var input = e.target.querySelector('input[type="email"]');
-    var btn   = e.target.querySelector('button[type="submit"]');
-    var orig  = btn.textContent;
-    btn.textContent = currentLang === 'nl' ? 'Bedankt!' : 'Thank you!';
-    btn.disabled = true;
-    input.value = '';
-    setTimeout(function () {
-      btn.textContent = orig;
-      btn.disabled = false;
-    }, 3000);
-  };
 
 })();
 </script>
