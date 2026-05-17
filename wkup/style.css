@@ -1373,7 +1373,7 @@ body[data-lang="en"] .lang-en     { display: revert !important; }
    BACK LINK
    ---------------------------------------------------------- */
 .back-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.375rem;
   font-size: 0.8rem;
