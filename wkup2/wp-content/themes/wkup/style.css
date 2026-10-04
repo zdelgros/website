@@ -875,6 +875,50 @@ h3.is-style-script, p.is-style-script { font-size: clamp(2rem, 1.6rem + 1.5vw, 2
 .home-content .entry-content :is(.wp-block-columns, .wp-block-media-text):first-child { margin-top: 0; }
 
 /* ==========================================================================
+   Questions and answers — Details blocks shown as an accordion, as on
+   wakeuplondon.org
+   ========================================================================== */
+
+.wp-block-details {
+	margin: 0 !important;
+	border-bottom: 1px solid var(--line);
+}
+.wp-block-details:first-of-type { border-top: 1px solid var(--line); }
+.wp-block-details > summary {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1.25rem;
+	padding: 1.1rem 0;
+	list-style: none;
+	color: var(--ink);
+	font: 500 1.2rem/1.35 var(--serif);
+	cursor: pointer;
+}
+.wp-block-details > summary::-webkit-details-marker { display: none; }
+.wp-block-details > summary::after {
+	content: "+";
+	flex: none;
+	color: var(--brown);
+	font: 400 1.6rem/1 var(--sans);
+	transition: transform .2s ease;
+}
+.wp-block-details[open] > summary::after { transform: rotate(45deg); }
+.wp-block-details > summary:hover { color: var(--brown); }
+.wp-block-details > :not(summary) {
+	margin: 0 0 1.25rem;
+	color: var(--ink-soft);
+}
+p + .wp-block-details { margin-top: 1.5rem !important; }
+.page-content .entry-content .wp-block-details {
+	max-width: calc(var(--narrow) - 2.5rem);
+	margin-inline: auto !important;
+}
+
+.faq { padding-block: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); }
+.faq h2 { margin-bottom: .6em; }
+
+/* ==========================================================================
    Forms (e.g. the newsletter form from Contact Form 7)
    ========================================================================== */
 
