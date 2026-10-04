@@ -1,0 +1,1065 @@
+/*
+Theme Name: Wake Up NL
+Theme URI: https://www.wkup.nl
+Author: Stichting Wake Up Nederland
+Description: Eenvoudig, tweetalig thema voor wkup.nl, in de stijl van het internationale Wake Up-netwerk. Toont de groepen uit de plugin "Wake Up Sangha's"; pagina's bewerk je gewoon met de blokeditor.
+Version: 1.1.0
+Requires at least: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wkup
+*/
+
+/* ==========================================================================
+   Fonts — Newsreader and Work Sans (as on wkup.org) plus Comforter Brush for
+   handwritten accents. All SIL Open Font License, self-hosted so visitors
+   make no requests to Google.
+   ========================================================================== */
+
+@font-face {
+	font-family: "Newsreader";
+	font-style: normal;
+	font-weight: 400 600;
+	font-display: swap;
+	src: url("assets/fonts/newsreader-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: "Newsreader";
+	font-style: normal;
+	font-weight: 400 600;
+	font-display: swap;
+	src: url("assets/fonts/newsreader-vietnamese.woff2") format("woff2");
+	unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+	font-family: "Work Sans";
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url("assets/fonts/work-sans-normal-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: "Work Sans";
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url("assets/fonts/work-sans-normal-vietnamese.woff2") format("woff2");
+	unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+	font-family: "Work Sans";
+	font-style: italic;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url("assets/fonts/work-sans-italic-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: "Comforter Brush";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("assets/fonts/comforter-brush-subset.woff2") format("woff2");
+}
+
+/* ==========================================================================
+   Tokens — the wkup.org palette (cream, sand, caramel, sage, forest green,
+   brown) with a warm coral accent for handwriting, as on interbeing.dk.
+   ========================================================================== */
+
+:root {
+	--cream: #f8f3ea;
+	--paper: #fffdf8;
+	--ink: #2b2a25;
+	--ink-soft: #5d584c;
+	--line: #e2d8c5;
+	--brown: #7a5233;
+	--brown-dark: #5e3e26;
+	--sand: #e7d6a9;
+	--sand-soft: #f1e7cc;
+	--caramel: #d3b896;
+	--sage: #d8e2d2;
+	--peach: #f6e8da;
+	--forest: #2e3f2f;
+	--coral: #c4554d;
+	--coral-soft: #f6ddd6;
+
+	--serif: "Newsreader", Georgia, "Times New Roman", serif;
+	--sans: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+	--script: "Comforter Brush", "Segoe Script", cursive;
+
+	--wrap: 72rem;
+	--narrow: 44rem;
+	--radius: 20px;
+}
+
+/* ==========================================================================
+   Languages — every page carries both; html[data-lang] decides which shows.
+   Our own markup uses .lang-nl / .lang-en. Editors use the block styles
+   "Alleen NL" / "Only EN"; a page that uses only one of them shows that
+   language in both modes, with a short note.
+   ========================================================================== */
+
+html[data-lang="nl"] .lang-en,
+html[data-lang="en"] .lang-nl,
+html[data-lang="nl"] [data-langs="both"] .is-style-lang-en,
+html[data-lang="en"] [data-langs="both"] .is-style-lang-nl {
+	display: none !important;
+}
+
+html[data-lang="en"] [data-langs="nl"]::before,
+html[data-lang="nl"] [data-langs="en"]::before {
+	display: block;
+	margin-bottom: 1.5rem;
+	font-style: italic;
+	color: var(--ink-soft);
+}
+html[data-lang="en"] [data-langs="nl"]::before { content: "This page is only available in Dutch."; }
+html[data-lang="nl"] [data-langs="en"]::before { content: "Deze pagina is alleen in het Engels beschikbaar."; }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-padding-top: 5.5rem;
+}
+
+body {
+	margin: 0;
+	background: var(--cream);
+	color: var(--ink);
+	font: 400 1.0625rem/1.7 var(--sans);
+}
+
+img,
+svg,
+video,
+iframe { max-width: 100%; }
+img { height: auto; }
+
+a {
+	color: var(--brown);
+	text-decoration-thickness: 1px;
+	text-underline-offset: .18em;
+}
+a:hover { color: var(--brown-dark); }
+
+:focus-visible {
+	outline: 3px solid var(--brown);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	margin: 0 0 .5em;
+	font-family: var(--serif);
+	font-weight: 500;
+	line-height: 1.15;
+	color: var(--ink);
+	text-wrap: balance;
+}
+h1 { font-size: clamp(2.2rem, 1.6rem + 2.6vw, 3.4rem); letter-spacing: -.01em; }
+h2 { font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.35rem); }
+h3 { font-size: 1.45rem; }
+
+p { margin: 0 0 1em; }
+
+/* Handwriting, for short warm headings ("Van harte welkom"). */
+.script,
+.is-style-script {
+	font-family: var(--script) !important;
+	font-weight: 400 !important;
+	line-height: 1.05;
+	letter-spacing: 0;
+	color: var(--brown);
+}
+h1.script, h2.script, h2.is-style-script { font-size: clamp(2.8rem, 2rem + 3vw, 4.4rem); }
+h3.is-style-script, p.is-style-script { font-size: clamp(2rem, 1.6rem + 1.5vw, 2.8rem); }
+
+.wrap {
+	width: 100%;
+	max-width: var(--wrap);
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+.wrap--narrow { max-width: var(--narrow); }
+
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: .75rem;
+	z-index: 100;
+	padding: .6rem 1rem;
+	border-radius: 6px;
+	background: var(--paper);
+}
+.skip-link:focus { left: .75rem; }
+
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	white-space: nowrap;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: rgba(248, 243, 234, .96);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 1px 0 var(--line);
+}
+.admin-bar .site-header { top: var(--wp-admin--admin-bar--height, 32px); }
+
+.site-header__inner {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	min-height: 4.5rem;
+}
+
+/*
+ * "Nederland" sits on the baseline of the handwritten "Wake Up". The logo
+ * image runs on below that baseline (the descender of the p), so align to the
+ * measured baseline, 36.15% of the logo's width from its top, rather than to
+ * the bottom of the image.
+ */
+.brand {
+	--logo-w: 5.25rem;
+	display: inline-flex;
+	align-items: flex-start;
+	gap: .55rem;
+	margin-right: auto;
+	color: var(--ink);
+	text-decoration: none;
+}
+.brand img { display: block; width: var(--logo-w); height: auto; }
+.brand__nation {
+	margin-top: calc(var(--logo-w) * .3615 - .84em);
+	font: 600 .66rem/1 var(--sans);
+	letter-spacing: .24em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+}
+
+.site-nav {
+	display: flex;
+	align-items: center;
+	gap: 1.75rem;
+}
+.site-nav__list {
+	display: flex;
+	gap: 1.6rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.site-nav__list a {
+	display: block;
+	padding: .35rem 0;
+	border-bottom: 2px solid transparent;
+	color: var(--ink);
+	font-weight: 500;
+	text-decoration: none;
+}
+.site-nav__list a:hover,
+.site-nav__list .current-menu-item > a,
+.site-nav__list .current_page_item > a,
+.site-nav__list a[aria-current="page"] {
+	border-bottom-color: var(--brown);
+	color: var(--brown);
+}
+
+.lang-switch {
+	display: inline-flex;
+	padding: 2px;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: var(--paper);
+}
+.lang-switch button {
+	padding: .42rem .7rem;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--ink-soft);
+	font: 600 .78rem/1 var(--sans);
+	letter-spacing: .04em;
+	cursor: pointer;
+}
+.lang-switch button[aria-pressed="true"] {
+	background: var(--brown);
+	color: #fff;
+}
+
+.nav-toggle {
+	display: none;
+	align-items: center;
+	gap: .5rem;
+	padding: .5rem .9rem;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: var(--paper);
+	color: var(--ink);
+	font: 600 .9rem/1 var(--sans);
+	cursor: pointer;
+}
+
+@media (max-width: 47.99rem) {
+	.site-header__inner { flex-wrap: wrap; }
+	.js .nav-toggle { display: inline-flex; }
+	.js .site-nav {
+		display: none;
+		position: absolute;
+		inset: 100% 0 auto 0;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.25rem;
+		padding: 1rem 1.25rem 1.5rem;
+		background: var(--cream);
+		box-shadow: 0 12px 24px rgba(43, 42, 37, .1);
+	}
+	.js .site-nav.is-open { display: flex; }
+	.site-nav__list { flex-direction: column; gap: .25rem; }
+	.site-nav__list a { font-size: 1.1rem; }
+}
+
+/* ==========================================================================
+   Buttons — pills, as on wkup.org
+   ========================================================================== */
+
+.button,
+.wkup-button,
+.wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: .4rem;
+	padding: .85rem 1.5rem;
+	border: 0;
+	border-radius: 999px;
+	background: var(--brown);
+	color: #fff;
+	font: 600 .98rem/1.1 var(--sans);
+	text-decoration: none;
+	cursor: pointer;
+}
+.button:hover,
+.wkup-button:hover,
+.wp-block-button__link:hover {
+	background: var(--brown-dark);
+	color: #fff;
+}
+.button--light {
+	background: #fff;
+	color: var(--ink);
+}
+.button--light:hover {
+	background: var(--cream);
+	color: var(--ink);
+}
+.button--outline-light {
+	background: transparent;
+	color: #fff;
+	box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .9);
+}
+.button--outline-light:hover {
+	background: rgba(255, 255, 255, .12);
+	color: #fff;
+}
+.button--ghost,
+.wp-block-button.is-style-outline .wp-block-button__link {
+	border: 0;
+	padding: .85rem 1.5rem;
+	background: transparent;
+	color: var(--brown);
+	box-shadow: inset 0 0 0 1.5px currentColor;
+}
+.button--ghost:hover,
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+	background: var(--sand-soft);
+	color: var(--brown-dark);
+}
+.wp-block-buttons { gap: .75rem; }
+
+/* A quiet text link with an arrow, as on wkup.org's cards. */
+.more {
+	font-weight: 600;
+	color: var(--ink);
+	text-decoration: none;
+}
+.more::after { content: " →"; }
+.more:hover { color: var(--brown); }
+
+/* ==========================================================================
+   Homepage hero — a sangha photo with the Wake Up calligraphy over it
+   ========================================================================== */
+
+.hero {
+	position: relative;
+	isolation: isolate;
+	display: grid;
+	align-items: center;
+	min-height: clamp(26rem, 64vh, 40rem);
+	overflow: hidden;
+	color: #fff;
+	text-align: center;
+	background: var(--forest);
+}
+.hero__photo {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.hero__shade {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: linear-gradient(180deg, rgba(30, 26, 18, .45) 0%, rgba(30, 26, 18, .5) 55%, rgba(30, 26, 18, .62) 100%);
+}
+.hero__inner {
+	display: grid;
+	justify-items: center;
+	gap: .9rem;
+	padding-block: 3.5rem 6rem;
+}
+.hero__logo {
+	width: min(17rem, 62vw);
+	filter: drop-shadow(0 2px 10px rgba(0, 0, 0, .25));
+}
+.hero__nation {
+	margin: -.4rem 0 .4rem;
+	font: 600 .78rem/1 var(--sans);
+	letter-spacing: .34em;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, .9);
+}
+.hero__tagline {
+	max-width: 38rem;
+	margin: 0;
+	color: rgba(255, 255, 255, .94);
+	font: 500 clamp(1rem, .9rem + .5vw, 1.25rem)/1.55 var(--serif);
+	letter-spacing: .09em;
+	text-transform: uppercase;
+	text-wrap: balance;
+}
+.hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: .75rem;
+	margin: 1.2rem 0 0;
+}
+.hero__wave {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -1px;
+	width: 100%;
+	height: clamp(28px, 4.5vw, 70px);
+	color: var(--cream);
+}
+
+.welcome {
+	padding-block: clamp(1.5rem, 1rem + 2vw, 3rem) .5rem;
+	text-align: center;
+}
+.welcome h2 { margin-bottom: .3em; }
+.welcome p {
+	max-width: 40rem;
+	margin-inline: auto;
+	color: var(--ink-soft);
+	font-size: 1.125rem;
+}
+
+/* ==========================================================================
+   Page structure
+   ========================================================================== */
+
+.section { padding-block: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); }
+.section--flush-top { padding-top: .5rem; }
+.section--warm { background: var(--sand-soft); }
+.section__head {
+	max-width: 46rem;
+	margin-bottom: 2rem;
+}
+.section__head p { color: var(--ink-soft); }
+
+.page-head { padding-block: clamp(2.25rem, 1.5rem + 2.5vw, 3.75rem) 1.75rem; }
+.page-head .lead {
+	max-width: 42rem;
+	color: var(--ink-soft);
+	font-size: 1.15rem;
+}
+.page-body { padding-bottom: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); }
+
+.eyebrow {
+	margin: 0 0 .9rem;
+	color: var(--brown);
+	font: 600 .74rem/1 var(--sans);
+	letter-spacing: .18em;
+	text-transform: uppercase;
+}
+
+.back {
+	display: inline-flex;
+	gap: .35rem;
+	margin-bottom: 1.5rem;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+/* ==========================================================================
+   Group list (markup from the Wake Up Sangha's plugin)
+   ========================================================================== */
+
+.wkup-list {
+	display: grid;
+	gap: 2.25rem;
+}
+.wkup-city__name {
+	margin: 0;
+	padding-bottom: .65rem;
+	border-bottom: 1px solid var(--line);
+	color: var(--ink-soft);
+	font: 600 .76rem/1 var(--sans);
+	letter-spacing: .18em;
+	text-transform: uppercase;
+}
+.wkup-city__groups {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.wkup-city__groups li { border-bottom: 1px solid var(--line); }
+
+.wkup-row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: .35rem 1.5rem;
+	margin-inline: -1rem;
+	padding: 1.1rem 1rem;
+	border-radius: 14px;
+	color: var(--ink);
+	text-decoration: none;
+	transition: background-color .15s ease;
+}
+.wkup-row:hover {
+	background: var(--paper);
+	color: var(--ink);
+}
+.wkup-row > span { min-width: 0; }
+.wkup-row__name {
+	grid-column: 1;
+	font: 500 1.3rem/1.25 var(--serif);
+}
+.wkup-row__meta {
+	grid-column: 1;
+	display: flex;
+	flex-wrap: wrap;
+	gap: .35rem;
+}
+.wkup-row__when,
+.wkup-row__where {
+	grid-column: 1;
+	color: var(--ink-soft);
+}
+.wkup-row__when > span,
+.wkup-row__where > span { display: block; }
+.wkup-time { white-space: nowrap; }
+.wkup-row__go {
+	grid-column: 2;
+	grid-row: 1 / span 4;
+	align-self: center;
+	color: var(--brown);
+	font-size: 1.25rem;
+	transition: transform .15s ease;
+}
+.wkup-row:hover .wkup-row__go { transform: translateX(3px); }
+
+@media (min-width: 56rem) {
+	.wkup-row {
+		grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.35fr) minmax(0, 1fr) 1.5rem;
+		align-items: start;
+	}
+	.wkup-row__name { grid-row: 1; }
+	.wkup-row__meta { grid-row: 2; }
+	.wkup-row__when {
+		grid-column: 2;
+		grid-row: 1 / span 2;
+		color: var(--ink);
+	}
+	.wkup-row__where {
+		grid-column: 3;
+		grid-row: 1 / span 2;
+	}
+	.wkup-row__go {
+		grid-column: 4;
+		grid-row: 1 / span 2;
+	}
+}
+
+.wkup-badge {
+	display: inline-block;
+	padding: .34rem .6rem;
+	border-radius: 999px;
+	background: var(--sand-soft);
+	color: var(--brown-dark);
+	font: 600 .72rem/1 var(--sans);
+	letter-spacing: .02em;
+}
+.wkup-badge--lang {
+	background: var(--sage);
+	color: var(--forest);
+}
+.wkup-badge--check {
+	background: var(--coral-soft);
+	color: #8e3b33;
+}
+.wkup-empty { color: var(--ink-soft); }
+
+.no-group {
+	display: grid;
+	gap: 1rem 2.5rem;
+	align-items: start;
+}
+@media (min-width: 52rem) {
+	.no-group { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+/* ==========================================================================
+   A group's page
+   ========================================================================== */
+
+.group-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .4rem;
+	margin-top: .75rem;
+}
+.group__layout {
+	display: grid;
+	gap: 2rem;
+	padding-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+@media (min-width: 56rem) {
+	.group__layout {
+		grid-template-columns: 21rem minmax(0, 1fr);
+		gap: 3.5rem;
+		align-items: start;
+	}
+	.group__info {
+		position: sticky;
+		top: 6rem;
+	}
+}
+
+.wkup-card {
+	padding: 1.6rem;
+	border-radius: var(--radius);
+	background: var(--sand-soft);
+}
+.wkup-facts {
+	display: grid;
+	gap: 1rem;
+	margin: 0;
+}
+.wkup-facts > div {
+	display: grid;
+	gap: .15rem;
+}
+.wkup-facts dt {
+	color: var(--ink-soft);
+	font: 600 .7rem/1.2 var(--sans);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+}
+.wkup-facts dd { margin: 0; }
+.wkup-note {
+	margin: .3rem 0 0;
+	color: var(--ink-soft);
+	font-size: .92rem;
+}
+.wkup-maplink {
+	display: inline-block;
+	margin-top: .25rem;
+	font-size: .92rem;
+}
+.wkup-card .wkup-button {
+	width: 100%;
+	margin-top: 1.4rem;
+}
+.wkup-card__confirmed {
+	margin: 1rem 0 0;
+	color: var(--ink-soft);
+	font-size: .82rem;
+	text-align: center;
+}
+
+.wkup-desc {
+	max-width: 40rem;
+	font-size: 1.1rem;
+}
+.wkup-desc p { margin: 0 0 1.1em; }
+.wkup-lang-note {
+	color: var(--ink-soft);
+	font-size: .95rem;
+	font-style: italic;
+}
+.group__photo {
+	display: block;
+	margin-bottom: 1.75rem;
+	border-radius: var(--radius);
+}
+
+.wkup-notice {
+	margin: 0 0 2rem;
+	padding: 1rem 1.25rem;
+	border-left: 4px solid var(--caramel);
+	border-radius: 12px;
+	background: var(--sand-soft);
+}
+.wkup-notice p { margin: 0; }
+.wkup-notice--stopped {
+	border-left-color: var(--coral);
+	background: var(--coral-soft);
+}
+
+/* ==========================================================================
+   Page content (block editor)
+   ========================================================================== */
+
+.entry-content { font-size: 1.0625rem; }
+.entry-content > * { margin-block: 0 1.1em; }
+.entry-content > :last-child { margin-bottom: 0; }
+.entry-content .wp-block-group > * { margin-block: 0 1.1em; }
+.entry-content .wp-block-group > :last-child { margin-bottom: 0; }
+.entry-content h2 { margin-top: 1.8em; }
+.entry-content h3 { margin-top: 1.4em; }
+.entry-content > h2:first-child,
+.entry-content .wp-block-group > h2:first-child,
+.entry-content .wp-block-group > h3:first-child { margin-top: 0; }
+.entry-content ul,
+.entry-content ol { padding-left: 1.3em; }
+.entry-content li { margin-bottom: .5em; }
+.entry-content .alignwide,
+.entry-content .alignfull { max-width: 100%; }
+.entry-content .is-style-lead,
+.entry-content .has-large-font-size { font-size: 1.25rem; color: var(--ink-soft); }
+
+.wp-block-quote,
+.entry-content blockquote {
+	margin: 1.8em 0;
+	padding: .25em 0 .25em 1.4em;
+	border-left: 3px solid var(--caramel);
+	font-family: var(--serif);
+	font-size: 1.35rem;
+	line-height: 1.45;
+}
+.wp-block-quote cite {
+	display: block;
+	margin-top: .6em;
+	color: var(--ink-soft);
+	font: 500 .9rem/1.4 var(--sans);
+}
+.wp-block-image img { border-radius: var(--radius); }
+.wp-block-separator {
+	margin: 2.5em 0;
+	border: 0;
+	border-top: 1px solid var(--line);
+}
+.entry-content table { width: 100%; border-collapse: collapse; }
+.entry-content th,
+.entry-content td {
+	padding: .5em;
+	border-bottom: 1px solid var(--line);
+	text-align: left;
+}
+
+/* Cards in wkup.org's earth tones: block styles on the Group block. */
+.is-style-card-sand,
+.is-style-card-caramel,
+.is-style-card-sage,
+.is-style-card-paper {
+	padding: 1.75rem 1.75rem 1.5rem;
+	border-radius: var(--radius);
+}
+.is-style-card-sand { background: var(--sand); }
+.is-style-card-caramel { background: var(--caramel); }
+.is-style-card-sage { background: var(--sage); }
+.is-style-card-paper { background: var(--paper); }
+.is-style-card-sand h3,
+.is-style-card-caramel h3,
+.is-style-card-sage h3,
+.is-style-card-paper h3 { margin-top: 0; }
+.wp-block-columns.is-layout-flex { gap: 1.25rem; }
+.wp-block-column > [class*="is-style-card-"] { height: 100%; }
+/* A card's last line, if it is just a link, reads as "Lees meer →". */
+[class*="is-style-card-"] p:last-child > a:only-child {
+	color: var(--ink);
+	font-weight: 600;
+	text-decoration: none;
+}
+[class*="is-style-card-"] p:last-child > a:only-child::after { content: " →"; }
+[class*="is-style-card-"] p:last-child > a:only-child:hover { color: var(--brown-dark); text-decoration: underline; }
+/* Classic themes wrap a group's blocks in an inner container. */
+.wp-block-group__inner-container > * { margin-block: 0 1em; }
+.wp-block-group__inner-container > :last-child { margin-bottom: 0; }
+[class*="is-style-card-"] h3:first-child { margin-top: 0; }
+
+/* A soft panel with a photo, as on interbeing.dk: block style on Media & Text. */
+.wp-block-media-text.is-style-panel {
+	overflow: hidden;
+	border-radius: 24px;
+	background: var(--peach);
+}
+.wp-block-media-text.is-style-panel .wp-block-media-text__content { padding: clamp(1.75rem, 1rem + 3vw, 3rem); }
+.wp-block-media-text.is-style-panel .wp-block-media-text__media {
+	align-self: stretch;
+	height: 100%;
+}
+.wp-block-media-text.is-style-panel .wp-block-media-text__media img {
+	width: 100%;
+	height: 100%;
+	min-height: 16rem;
+	object-fit: cover;
+	border-radius: 0;
+}
+.wp-block-media-text:not(.is-style-panel) .wp-block-media-text__media img { border-radius: var(--radius); }
+.wp-block-media-text .wp-block-media-text__content > :last-child { margin-bottom: 0; }
+
+/*
+ * Pages: running text stays at a readable width, centred under the title;
+ * cards, columns and photo panels get more room.
+ */
+.page-content .entry-content :is(p, h2, h3, h4, ul, ol, blockquote, .wp-block-buttons, .wp-block-image, .wp-block-separator) {
+	max-width: calc(var(--narrow) - 2.5rem); /* the title's column: --narrow minus the side padding */
+	margin-inline: auto;
+}
+.page-content .entry-content :is(.wp-block-columns, .wp-block-media-text) {
+	max-width: 62rem;
+	margin-inline: auto;
+	margin-block: clamp(1.75rem, 1rem + 2vw, 3rem);
+}
+.page-content .entry-content :is([class*="is-style-card-"], .wp-block-media-text__content) :is(p, h2, h3, h4, ul, ol, blockquote, .wp-block-buttons) {
+	max-width: none;
+	margin-inline: 0;
+}
+.page-content .entry-content .is-style-lead { margin-bottom: 1.5em; }
+
+.home-content { padding-block: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); }
+.home-content .entry-content :is(.wp-block-columns, .wp-block-media-text) { max-width: none; }
+.home-content .entry-content :is(.wp-block-columns, .wp-block-media-text):first-child { margin-top: 0; }
+
+/* ==========================================================================
+   Forms (e.g. the newsletter form from Contact Form 7)
+   ========================================================================== */
+
+.entry-content input[type="text"],
+.entry-content input[type="email"],
+.entry-content input[type="tel"],
+.entry-content input[type="url"],
+.entry-content select,
+.entry-content textarea {
+	width: 100%;
+	max-width: 32rem;
+	padding: .7rem .9rem;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	background: var(--paper);
+	color: var(--ink);
+	font: inherit;
+}
+.entry-content input:focus,
+.entry-content select:focus,
+.entry-content textarea:focus {
+	border-color: var(--brown);
+	outline: 2px solid var(--sand-soft);
+}
+.entry-content input[type="submit"],
+.entry-content button[type="submit"] {
+	padding: .85rem 1.5rem;
+	border: 0;
+	border-radius: 999px;
+	background: var(--brown);
+	color: #fff;
+	font: 600 1rem/1.1 var(--sans);
+	cursor: pointer;
+}
+.entry-content input[type="submit"]:hover,
+.entry-content button[type="submit"]:hover { background: var(--brown-dark); }
+.entry-content label { font-weight: 500; }
+
+/* ==========================================================================
+   Events (The Events Calendar)
+   ========================================================================== */
+
+.events {
+	display: grid;
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.event {
+	display: grid;
+	grid-template-columns: 4.25rem minmax(0, 1fr);
+	gap: 1.25rem;
+	align-items: start;
+	padding: 1.2rem 1.4rem;
+	border-radius: var(--radius);
+	background: var(--paper);
+}
+.event__date {
+	color: var(--brown);
+	text-align: center;
+}
+.event__day {
+	display: block;
+	font: 500 2.1rem/1 var(--serif);
+}
+.event__month {
+	display: block;
+	font: 600 .72rem/1.6 var(--sans);
+	letter-spacing: .14em;
+	text-transform: uppercase;
+}
+.event h3 {
+	margin: 0 0 .25rem;
+	font-size: 1.25rem;
+}
+.event h3 a {
+	color: var(--ink);
+	text-decoration: none;
+}
+.event h3 a:hover { color: var(--brown); }
+.event p {
+	margin: 0;
+	color: var(--ink-soft);
+	font-size: .95rem;
+}
+.events-more { margin-top: 1.25rem; }
+
+/* ==========================================================================
+   Posts (news)
+   ========================================================================== */
+
+.posts {
+	display: grid;
+	gap: 2.25rem;
+}
+.post-card h2 {
+	margin-bottom: .25rem;
+	font-size: 1.5rem;
+}
+.post-card h2 a {
+	color: var(--ink);
+	text-decoration: none;
+}
+.post-card h2 a:hover { color: var(--brown); }
+.post-meta {
+	margin-bottom: .75rem;
+	color: var(--ink-soft);
+	font-size: .9rem;
+}
+.pagination {
+	display: flex;
+	gap: 1rem;
+	margin-top: 2.5rem;
+}
+
+/* ==========================================================================
+   Footer — the forest green of wkup.org
+   ========================================================================== */
+
+.site-footer {
+	padding-block: 3.5rem 1.5rem;
+	background: var(--forest);
+	color: rgba(248, 243, 234, .82);
+	font-size: .95rem;
+}
+.site-footer a { color: var(--cream); }
+.site-footer a:hover { color: #fff; }
+.site-footer__grid {
+	display: grid;
+	gap: 2rem 3rem;
+	grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+}
+.site-footer__brand img {
+	display: block;
+	width: 6.5rem;
+	margin-bottom: .75rem;
+}
+.site-footer__brand p { max-width: 22rem; }
+.site-footer h2 {
+	margin: 0 0 1rem;
+	color: var(--sand);
+	font: 600 .74rem/1 var(--sans);
+	letter-spacing: .18em;
+	text-transform: uppercase;
+}
+.site-footer ul {
+	display: grid;
+	gap: .5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.site-footer__bottom {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .5rem 1.5rem;
+	margin-top: 2.75rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid rgba(248, 243, 234, .16);
+	color: rgba(248, 243, 234, .62);
+	font-size: .85rem;
+}
+.site-footer__bottom .grow { margin-right: auto; }
+.site-footer__bottom a { color: rgba(248, 243, 234, .85); }
+
+/* ==========================================================================
+   Misc
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition: none !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+@media print {
+	.site-header,
+	.site-footer,
+	.lang-switch,
+	.hero__photo,
+	.hero__wave { display: none; }
+	body { background: #fff; }
+	.hero { color: var(--ink); min-height: 0; }
+}
