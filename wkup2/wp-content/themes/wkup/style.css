@@ -819,6 +819,17 @@ h3.is-style-script, p.is-style-script { font-size: clamp(2rem, 1.6rem + 1.5vw, 2
 	width: 100%;
 	margin-top: 1.4rem;
 }
+/* Next to a sign-up button (Hipsy), the e-mail button steps back. */
+.wkup-card .wkup-button--secondary {
+	margin-top: .6rem;
+	background: transparent;
+	color: var(--brown);
+	box-shadow: inset 0 0 0 1.5px var(--brown);
+}
+.wkup-card .wkup-button--secondary:hover {
+	background: var(--sand-soft);
+	color: var(--brown-dark);
+}
 .wkup-card__confirmed {
 	margin: 1rem 0 0;
 	color: var(--ink-soft);
