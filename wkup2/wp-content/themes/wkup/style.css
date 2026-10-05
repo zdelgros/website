@@ -881,36 +881,100 @@ h3.is-style-script, p.is-style-script { font-size: clamp(2rem, 1.6rem + 1.5vw, 2
 	text-align: left;
 }
 
-/* Cards in wkup.org's earth tones: block styles on the Group block. */
-.is-style-card-sand,
-.is-style-card-caramel,
-.is-style-card-sage,
-.is-style-card-paper {
-	padding: 1.75rem 1.75rem 1.5rem;
+/*
+ * Cards: a block style on the Group block. White paper with a photo inset at
+ * the top (put an Image block first), a brush stroke under the heading, after
+ * the brush calligraphy of the Wake Up logo, and a round arrow on the link.
+ * "Kaart: zand / karamel / salie / wit" only picks the accent colour.
+ */
+[class*="is-style-card-"] {
+	--card-accent: var(--brown);
+	position: relative;
+	padding: 1.5rem 1.5rem 1.4rem;
+	border: 1px solid var(--line);
 	border-radius: var(--radius);
+	background: var(--paper);
+	box-shadow: 0 1px 0 rgba(43, 42, 37, .04), 0 14px 30px -22px rgba(43, 42, 37, .45);
+	transition: transform .2s ease, box-shadow .2s ease;
 }
-.is-style-card-sand { background: var(--sand); }
-.is-style-card-caramel { background: var(--caramel); }
-.is-style-card-sage { background: var(--sage); }
-.is-style-card-paper { background: var(--paper); }
-.is-style-card-sand h3,
-.is-style-card-caramel h3,
-.is-style-card-sage h3,
-.is-style-card-paper h3 { margin-top: 0; }
+.is-style-card-sand { --card-accent: #c49a3c; }
+.is-style-card-caramel { --card-accent: #ad744a; }
+.is-style-card-sage { --card-accent: #789670; }
+.entry-content [class*="is-style-card-"] h3 { margin-top: 0; }
+[class*="is-style-card-"] h3::after {
+	content: "";
+	display: block;
+	width: 4.75rem;
+	height: .65rem;
+	margin-top: .4rem;
+	background: var(--card-accent);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16'%3E%3Cpath d='M3 10.6C15.8 7.4 30.6 5.7 46.4 5.4c16.8-.3 32.9 1 49.2.7 7.1-.2 14.2-1 21.3-2.3-5.5 3.5-12.6 5.6-20.4 6.4-16.6 1.8-33.2.8-49.8 1.7-14.2.8-28.3 2.1-42.5 4z'/%3E%3Cpath d='M14 13.4c10.5-1.3 21-2 31.5-2.2' stroke='black' stroke-width='.9' fill='none' stroke-linecap='round' opacity='.55'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16'%3E%3Cpath d='M3 10.6C15.8 7.4 30.6 5.7 46.4 5.4c16.8-.3 32.9 1 49.2.7 7.1-.2 14.2-1 21.3-2.3-5.5 3.5-12.6 5.6-20.4 6.4-16.6 1.8-33.2.8-49.8 1.7-14.2.8-28.3 2.1-42.5 4z'/%3E%3Cpath d='M14 13.4c10.5-1.3 21-2 31.5-2.2' stroke='black' stroke-width='.9' fill='none' stroke-linecap='round' opacity='.55'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+.entry-content [class*="is-style-card-"] .wp-block-image:first-child {
+	max-width: none;
+	margin: -.75rem -.75rem 1.3rem;
+	overflow: hidden;
+	border-radius: calc(var(--radius) - 7px);
+}
+.entry-content [class*="is-style-card-"] .wp-block-image:first-child img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+	border-radius: 0;
+	transition: transform .5s ease;
+}
 .wp-block-columns.is-layout-flex { gap: 1.25rem; }
-.wp-block-column > [class*="is-style-card-"] { height: 100%; }
-/* A card's last line, if it is just a link, reads as "Lees meer →". */
+/* Cards in a row are equally tall, with the link at the bottom. */
+.wp-block-column > [class*="is-style-card-"],
+.wp-block-column > [class*="is-style-card-"] > .wp-block-group__inner-container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	height: 100%;
+}
+.wp-block-column > [class*="is-style-card-"] > :last-child,
+.wp-block-column > [class*="is-style-card-"] > .wp-block-group__inner-container > :last-child { margin-top: auto; }
+/* A card's last line, if it is just a link, gets a round arrow and makes the whole card clickable. */
 [class*="is-style-card-"] p:last-child > a:only-child {
+	display: inline-flex;
+	align-items: center;
+	gap: .65rem;
 	color: var(--ink);
 	font-weight: 600;
 	text-decoration: none;
 }
-[class*="is-style-card-"] p:last-child > a:only-child::after { content: " →"; }
-[class*="is-style-card-"] p:last-child > a:only-child:hover { color: var(--brown-dark); text-decoration: underline; }
+[class*="is-style-card-"] p:last-child > a:only-child::after {
+	content: "→";
+	display: inline-grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background: var(--card-accent);
+	color: #fff;
+	transition: transform .2s ease;
+}
+[class*="is-style-card-"] p:last-child > a:only-child::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+[class*="is-style-card-"]:has(p:last-child > a:only-child):hover {
+	transform: translateY(-3px);
+	box-shadow: 0 1px 0 rgba(43, 42, 37, .04), 0 20px 36px -22px rgba(43, 42, 37, .5);
+}
+[class*="is-style-card-"]:hover .wp-block-image:first-child img { transform: scale(1.04); }
+[class*="is-style-card-"]:hover p:last-child > a:only-child::after { transform: translateX(3px); }
+[class*="is-style-card-"]:has(a:focus-visible) {
+	outline: 2px solid var(--card-accent);
+	outline-offset: 3px;
+}
 /* Classic themes wrap a group's blocks in an inner container. */
 .wp-block-group__inner-container > * { margin-block: 0 1em; }
 .wp-block-group__inner-container > :last-child { margin-bottom: 0; }
-[class*="is-style-card-"] h3:first-child { margin-top: 0; }
 
 /* A soft panel with a photo, as on interbeing.dk: block style on Media & Text. */
 .wp-block-media-text.is-style-panel {
