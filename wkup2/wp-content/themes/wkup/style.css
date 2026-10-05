@@ -546,9 +546,34 @@ h3.is-style-script, p.is-style-script { font-size: clamp(2rem, 1.6rem + 1.5vw, 2
 	cursor: pointer;
 }
 .newsletter__form p { margin: 0 0 .5rem; }
+/* Contact Form 7 (the live sign-up form): e-mail field and button side by side. */
+.newsletter__form .wpcf7-form > p {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .6rem;
+	margin: 0;
+}
+.newsletter__form .wpcf7-form > p > br { display: none; }
+.newsletter__form .wpcf7-form-control-wrap { flex: 1 1 14rem; }
+.newsletter__form .wpcf7-form-control-wrap input { max-width: none; }
+.newsletter__form .wpcf7-form :is(input[type="submit"], button[type="submit"]) { margin-top: 0; }
+.newsletter__form .wpcf7-spinner { margin: 0; }
+.newsletter__form .wpcf7-not-valid-tip {
+	margin-top: .35rem;
+	color: #f3c2b6;
+	font-size: .85rem;
+}
+.newsletter__form .wpcf7 form .wpcf7-response-output {
+	margin: .75rem 0 0;
+	padding: .55rem .9rem;
+	border-radius: 12px;
+	color: var(--cream);
+	font-size: .92rem;
+}
 @media (min-width: 52rem) {
 	.newsletter__inner { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-	.newsletter__actions { justify-self: end; }
+	.newsletter__actions { text-align: right; }
 }
 
 /* ==========================================================================
@@ -882,10 +907,11 @@ h3.is-style-script, p.is-style-script { font-size: clamp(2rem, 1.6rem + 1.5vw, 2
 }
 
 /*
- * Cards: a block style on the Group block. White paper with a photo inset at
- * the top (put an Image block first), a brush stroke under the heading, after
- * the brush calligraphy of the Wake Up logo, and a round arrow on the link.
- * "Kaart: zand / karamel / salie / wit" only picks the accent colour.
+ * Cards: a block style on the Group block. White paper, a brush stroke under
+ * the heading (after the brush calligraphy of the Wake Up logo) and a round
+ * arrow on the link. "Kaart: zand / karamel / salie / wit" only picks the
+ * accent colour. The homepage cards are text only on purpose (photos made the
+ * row too busy); an Image block placed first would still get a neat inset.
  */
 [class*="is-style-card-"] {
 	--card-accent: var(--brown);
